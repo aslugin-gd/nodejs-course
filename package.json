@@ -1,0 +1,38 @@
+{
+	"name": "fcc-exercise-tracker",
+	"version": "0.1.0",
+	"description": "A REST API project, part of Free Code Camp's curriculum",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"start": "tsx src/index.js",
+		"watch": "tsx --watch src/index.js",
+		"db:push": "prisma db push",
+		"db:gui": "prisma studio"
+	},
+	"dependencies": {
+		"@prisma/client": "^5.21.1",
+		"body-parser": "^2.0.2",
+		"cors": "^2.8.5",
+		"dotenv": "^16.4.5",
+		"express": "^5.0.1",
+		"prisma": "^5.21.1"
+	},
+	"repository": {
+		"url": "https://github.com/freeCodeCamp/boilerplate-project-exercisetracker"
+	},
+	"license": "MIT",
+	"keywords": [
+		"node",
+		"express"
+	],
+	"devDependencies": {
+		"@types/cors": "^2.8.17",
+		"@types/express": "^5.0.0",
+		"@types/node": "^22.8.6",
+		"tsx": "^4.19.2"
+	},
+	"engines": {
+		"node": "22.10.0"
+	}
+}
