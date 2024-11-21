@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
+
 import { ApiResponse, CreatedExerciseParams, CreatedExerciseRequest, CreatedExerciseResponse } from "../types.js";
 import { db } from "../models/index.js";
 import { AppError } from "../utils/error.js";
+import { isValidDate } from "../utils/isValidDate.js";
+
 
 export const createExercise = async (
   req: Request<CreatedExerciseParams, ApiResponse<CreatedExerciseResponse>, CreatedExerciseRequest>,
@@ -20,10 +23,9 @@ export const createExercise = async (
     throw new AppError('"duration" is required. Should be a positive number (> 0)', 400);
   }
 
-  if (date && !Date.parse(date)) {
-    throw new AppError('"date" is invalid. Should be the valid date in the YYYY-MM-DD format', 400);
+  if (date && !isValidDate(date)) {
+    throw new AppError('"date" is invalid. Should be the date in the YYYY-MM-DD format', 400);
   }
-
 
   if (Number.isNaN(id)) {
     throw new AppError('"id" slug in path should be a valid integer number', 400);
@@ -34,7 +36,7 @@ export const createExercise = async (
     throw new AppError(`User with id: "${id}" doesn't exist`, 400);
   }
 
-  if (!date || !Date.parse(date)) {
+  if (!date) {
     const today = new Date();
     const year = today.getFullYear();
     const month = (today.getMonth() + 1).toString().padStart(2, '0');
@@ -51,11 +53,11 @@ export const getExerciseLogs = async (req: Request, res: Response) => {
   const from = req.query.from?.toString() || undefined;
   const to = req.query.to?.toString() || undefined;
 
-  if (from && !Date.parse(from)) {
+  if (from && !isValidDate(from)) {
     throw new AppError('"from" query should be the valid date in the YYYY-MM-DD format', 400);
   }
 
-  if (to && !Date.parse(to)) {
+  if (to && !isValidDate(to)) {
     throw new AppError('"to" query should be the valid date in the YYYY-MM-DD format', 400);
   }
 
