@@ -41,6 +41,7 @@ export const getExercisesHandlers = (prisma: PrismaClient) => ({
 
     const count = await prisma.exercise.count({
       where: {
+        userId,
         date: {
           lte: to,
           gte: from
