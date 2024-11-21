@@ -34,7 +34,9 @@ export const getExercisesHandlers = (prisma: PrismaClient) => ({
           gte: from
         }
       },
-
+      orderBy: {
+        date: "asc"
+      }
     });
 
     const count = await prisma.exercise.count({
