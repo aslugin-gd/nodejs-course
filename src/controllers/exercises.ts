@@ -16,8 +16,8 @@ export const createExercise = async (
     throw new AppError('"description" is required and should be non-empty string', 400);
   }
 
-  if (!duration) {
-    throw new AppError('"duration" is required', 400);
+  if (!duration || duration <= 0) {
+    throw new AppError('"duration" is required. Should be a positive number (> 0)', 400);
   }
 
   if (date && !Date.parse(date)) {
